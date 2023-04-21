@@ -150,7 +150,8 @@ namespace OpenTK.Wpf
         // There are others that should probably be sent -- focus doesn't seem to work for whatever reason
         internal void OnKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.OriginalSource != this)
+            // yes, this is crutch
+            if (e.OriginalSource.GetType() != this.GetType())
             {
                 KeyEventArgs args = new KeyEventArgs(e.KeyboardDevice, e.InputSource, e.Timestamp, e.Key);
                 args.RoutedEvent = Keyboard.KeyDownEvent;
@@ -159,7 +160,7 @@ namespace OpenTK.Wpf
         }
         internal void OnKeyUp(object sender, KeyEventArgs e)
         {
-            if (e.OriginalSource != this)
+            if (e.OriginalSource.GetType() != this.GetType())
             {
                 KeyEventArgs args = new KeyEventArgs(e.KeyboardDevice, e.InputSource, e.Timestamp, e.Key);
                 args.RoutedEvent = Keyboard.KeyUpEvent;
